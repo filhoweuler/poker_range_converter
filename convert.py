@@ -1,6 +1,8 @@
 import csv
 import json
 
+cards = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2']
+
 hands = [
   'AA',
   'AKs',
@@ -241,26 +243,27 @@ def compact_range_to_dict(compact_range):
         if ('%' in token):
             continue
         if 'x' in token:
-            clean_token = token.replace('x', '2')
-            offsuit_token = clean_token.replace('+', 'o+')
-            suited_token = clean_token.replace('+', 's+')
-            offsuit_token_range = token_to_range(offsuit_token)
-            suited_token_range = token_to_range(suited_token)
-            result = result | offsuit_token_range
-            result = result | suited_token_range
+            card = token[0]
+            card_position = cards.index(card)
+            for i in range(card_position + 1):
+                offsuit_token = f"{cards[i]}2o+"
+                suited_token = f"{cards[i]}2o+"
+                offsuit_token_range = token_to_range(offsuit_token)
+                suited_token_range = token_to_range(suited_token)
+                result = result | offsuit_token_range
+                result = result | suited_token_range
             continue
 
         token_range = token_to_range(token)
         result = result | token_range
     return result
 
-print(compact_range_to_dict('TT+ ATs+ AJo+ KTs+ QJs'))
+print(compact_range_to_dict('TT+ Ax+ KTs+ QJs'))
 
 full_dict = {}
 def convert_lines(lines, ante: str):
     stack_size = 1
     for line in lines:
-        print('new stack', line[0])
         position_index = 0
         for compact_range in line[1:]:
             position = positions[position_index]
