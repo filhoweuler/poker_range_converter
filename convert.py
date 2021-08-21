@@ -247,7 +247,7 @@ def compact_range_to_dict(compact_range):
             card_position = cards.index(card)
             for i in range(card_position + 1):
                 offsuit_token = f"{cards[i]}2o+"
-                suited_token = f"{cards[i]}2o+"
+                suited_token = f"{cards[i]}2s+"
                 offsuit_token_range = token_to_range(offsuit_token)
                 suited_token_range = token_to_range(suited_token)
                 result = result | offsuit_token_range
