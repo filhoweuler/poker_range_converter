@@ -176,6 +176,7 @@ hands = [
 ];
 
 positions = ['UTG', 'UTG+1', 'MP1', 'MP2', 'HJ', 'CO', 'BTN', 'SB']
+positions.reverse()
 
 ANTE = 'None'
 
